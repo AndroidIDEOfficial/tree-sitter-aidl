@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <settings default="tree-sitter-aidl">
+    <module2copyright>
+      <element module="All" copyright="tree-sitter-aidl" />
+    </module2copyright>
+  </settings>
+</component>

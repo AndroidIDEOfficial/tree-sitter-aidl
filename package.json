@@ -1,0 +1,43 @@
+{
+  "name": "tree-sitter-aidl",
+  "version": "1.0.0",
+  "description": "Tree Sitter grammar for AIDL files",
+  "main": "bindings/node",
+  "scripts": {
+    "build": "tree-sitter generate",
+    "build-wasm": "tree-sitter build-wasm",
+    "test": "tree-sitter test",
+    "playground": "tree-sitter generate && tree-sitter build-wasm && tree-sitter playground"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndroidIDEOfficial/tree-sitter-aidl.git"
+  },
+  "keywords": [
+    "androidide",
+    "treesitter",
+    "grammar",
+    "aidl"
+  ],
+  "author": "Akash Yadav",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/AndroidIDEOfficial/tree-sitter-aidl/issues"
+  },
+  "homepage": "https://github.com/AndroidIDEOfficial/tree-sitter-aidl#readme",
+  "tree-sitter": [
+    {
+      "scope": "scope.properties",
+      "file-types": [
+        "properties",
+        "prop"
+      ]
+    }
+  ],
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  }
+}
