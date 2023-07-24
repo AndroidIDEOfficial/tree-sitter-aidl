@@ -166,10 +166,6 @@
       {
         "type": "primary_expression",
         "named": true
-      },
-      {
-        "type": "switch_expression",
-        "named": true
       }
     ]
   },
@@ -273,10 +269,6 @@
       },
       {
         "type": "return_statement",
-        "named": true
-      },
-      {
-        "type": "switch_expression",
         "named": true
       },
       {
@@ -2031,112 +2023,6 @@
     }
   },
   {
-    "type": "switch_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "switch_block_statement_group",
-          "named": true
-        },
-        {
-          "type": "switch_rule",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "switch_block_statement_group",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "statement",
-          "named": true
-        },
-        {
-          "type": "switch_label",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "switch_expression",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "switch_block",
-            "named": true
-          }
-        ]
-      },
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "switch_label",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "switch_rule",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "switch_label",
-          "named": true
-        },
-        {
-          "type": "throw_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "synchronized_statement",
     "named": true,
     "fields": {
@@ -2622,10 +2508,6 @@
     "named": false
   },
   {
-    "type": "case",
-    "named": false
-  },
-  {
     "type": "catch",
     "named": false
   },
@@ -2780,10 +2662,6 @@
   {
     "type": "super",
     "named": true
-  },
-  {
-    "type": "switch",
-    "named": false
   },
   {
     "type": "synchronized",

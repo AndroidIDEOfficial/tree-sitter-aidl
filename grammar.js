@@ -205,8 +205,7 @@ module.exports = grammar({
             $.binary_expression,
             $.lambda_expression,
             $.primary_expression,
-            $.cast_expression,
-            $.switch_expression,
+            $.cast_expression
         ),
 
         cast_expression: $ => prec(PREC.CAST, seq(
@@ -354,37 +353,6 @@ module.exports = grammar({
             seq(repeat($._annotation), '[', ']')
         )),
 
-        switch_expression: $ => seq(
-            'switch',
-            field('condition', $.parenthesized_expression),
-            field('body', $.switch_block)
-        ),
-
-        switch_block: $ => seq(
-            '{',
-            choice(
-                repeat($.switch_block_statement_group),
-                repeat($.switch_rule)
-            ),
-            '}'
-        ),
-
-        switch_block_statement_group: $ => prec.left(seq(
-            repeat1(seq($.switch_label, ':')),
-            repeat($.statement),
-        )),
-
-        switch_rule: $ => seq(
-            $.switch_label,
-            '->',
-            choice($.expression_statement, $.throw_statement, $.block)
-        ),
-
-        switch_label: $ => choice(
-            seq('case', commaSep1($.expression)),
-            'default'
-        ),
-
         // Statements
 
         statement: $ => choice(
@@ -403,7 +371,6 @@ module.exports = grammar({
             $.continue_statement,
             $.return_statement,
             $.yield_statement,
-            $.switch_expression, // switch statements and expressions are identical
             $.synchronized_statement,
             $.local_variable_declaration,
             $.throw_statement,
