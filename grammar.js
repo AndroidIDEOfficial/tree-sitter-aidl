@@ -71,7 +71,6 @@ module.exports = grammar({
         $._name,
         $._simple_type,
         $._reserved_identifier,
-        $._class_body_declaration,
         $._variable_initializer
     ],
 
@@ -557,13 +556,6 @@ module.exports = grammar({
             '}'
         ),
 
-        constant_declaration: $ => seq(
-            optional($.modifiers),
-            field('type', $._unannotated_type),
-            $._variable_declarator_list,
-            ';'
-        ),
-
         _variable_declarator_list: $ => commaSep1(
             field('declarator', $.variable_declarator)
         ),
@@ -716,12 +708,6 @@ module.exports = grammar({
             optional($.modifiers),
             $._method_header,
             ';'
-        ),
-
-        compact_constructor_declaration: $ => seq(
-            optional($.modifiers),
-            field('name', $.identifier),
-            field('body', $.block)
         ),
 
         _reserved_identifier: $ => alias(choice(
