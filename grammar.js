@@ -363,11 +363,7 @@ module.exports = grammar({
             $.assert_statement,
             $.return_statement,
             $.yield_statement,
-            $.synchronized_statement,
             $.local_variable_declaration,
-            $.throw_statement,
-            $.try_statement,
-            $.try_with_resources_statement
         ),
 
         block: $ => seq(
@@ -394,65 +390,6 @@ module.exports = grammar({
             'yield',
             $.expression,
             ';'
-        ),
-
-        synchronized_statement: $ => seq(
-            'synchronized',
-            $.parenthesized_expression,
-            field('body', $.block)
-        ),
-
-        throw_statement: $ => seq('throw', $.expression, ';'),
-
-        try_statement: $ => seq(
-            'try',
-            field('body', $.block),
-            choice(
-                repeat1($.catch_clause),
-                seq(repeat($.catch_clause), $.finally_clause)
-            )
-        ),
-
-        catch_clause: $ => seq(
-            'catch',
-            '(',
-            $.catch_formal_parameter,
-            ')',
-            field('body', $.block)
-        ),
-
-        catch_formal_parameter: $ => seq(
-            optional($.modifiers),
-            $.catch_type,
-            $._variable_declarator_id
-        ),
-
-        catch_type: $ => sep1($._unannotated_type, '|'),
-
-        finally_clause: $ => seq('finally', $.block),
-
-        try_with_resources_statement: $ => seq(
-            'try',
-            field('resources', $.resource_specification),
-            field('body', $.block),
-            repeat($.catch_clause),
-            optional($.finally_clause)
-        ),
-
-        resource_specification: $ => seq(
-            '(', sep1($.resource, ';'), optional(';'), ')'
-        ),
-
-        resource: $ => choice(
-            seq(
-                optional($.modifiers),
-                field('type', $._unannotated_type),
-                $._variable_declarator_id,
-                '=',
-                field('value', $.expression)
-            ),
-            $.identifier,
-            $.field_access
         ),
 
         // Annotations
