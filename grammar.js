@@ -78,17 +78,14 @@ module.exports = grammar({
         [$.modifiers, $.annotated_type, $.receiver_parameter],
         [$.modifiers, $.annotated_type, $.package_declaration],
         [$.package_declaration, $.modifiers],
-        [$._unannotated_type, $.primary_expression, $.inferred_parameters],
         [$._unannotated_type, $.primary_expression],
         [$._unannotated_type, $.primary_expression, $.scoped_type_identifier],
         [$._unannotated_type, $.scoped_type_identifier],
         [$._unannotated_type, $.generic_type],
         [$.generic_type, $.primary_expression],
         [$.expression, $.statement],
-        // Only conflicts in switch expressions
-        [$.lambda_expression, $.primary_expression],
-        [$.inferred_parameters, $.primary_expression],
         [$.class_literal, $.field_access],
+        [$.modifiers, $.receiver_parameter],
     ],
 
     word: $ => $.identifier,
@@ -203,7 +200,6 @@ module.exports = grammar({
         expression: $ => choice(
             $.assignment_expression,
             $.binary_expression,
-            $.lambda_expression,
             $.primary_expression,
             $.cast_expression
         ),
@@ -254,20 +250,6 @@ module.exports = grammar({
                     field('right', $.expression)
                 ))
             )),
-
-        lambda_expression: $ => seq(
-            field('parameters', choice(
-                $.identifier, $.formal_parameters, $.inferred_parameters, $._reserved_identifier
-            )),
-            '->',
-            field('body', choice($.expression, $.block))
-        ),
-
-        inferred_parameters: $ => seq(
-            '(',
-            commaSep1(choice($.identifier, $._reserved_identifier)),
-            ')'
-        ),
 
         primary_expression: $ => choice(
             $._literal,

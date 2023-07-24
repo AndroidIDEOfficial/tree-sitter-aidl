@@ -160,10 +160,6 @@
         "named": true
       },
       {
-        "type": "lambda_expression",
-        "named": true
-      },
-      {
         "type": "primary_expression",
         "named": true
       }
@@ -847,21 +843,6 @@
     }
   },
   {
-    "type": "inferred_parameters",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "integral_type",
     "named": true,
     "fields": {}
@@ -925,44 +906,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "lambda_expression",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "formal_parameters",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "inferred_parameters",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -1634,10 +1577,6 @@
   },
   {
     "type": "-",
-    "named": false
-  },
-  {
-    "type": "->",
     "named": false
   },
   {
