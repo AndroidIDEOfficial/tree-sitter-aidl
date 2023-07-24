@@ -401,6 +401,7 @@ module.exports = grammar({
             $.package_declaration,
             $.import_declaration,
             $.interface_declaration,
+            $.parcelable_declaration
         )),
 
         package_declaration: $ => seq(
@@ -521,6 +522,21 @@ module.exports = grammar({
         variable_declarator: $ => seq(
             field('name', choice($.identifier, $._reserved_identifier)),
             field('dimensions', optional($.dimensions))
+        ),
+
+        parcelable_declaration: $ => seq(
+            'parcelable',
+            field('name', $.identifier),
+            choice(
+                field('body', $.parcelable_body),
+                ';'
+            )
+        ),
+
+        parcelable_body: $ => seq(
+            '{',
+            repeat($.field_declaration),
+            '}'
         ),
 
         // Types
