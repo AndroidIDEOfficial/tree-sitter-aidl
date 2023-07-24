@@ -1,16 +1,8 @@
 # tree-sitter-aidl
 
 <a href="https://github.com/AndroidIDEOfficial/AndroidIDE"><img src="https://androidide.com/github/img/androidide.php?part&for-the-badge"/></a><br><br>
-Tree Sitter Grammar for `AIDL` file, based on the format
+Tree Sitter Grammar for `AIDL` file, adapted from [tree-sitter-java](https://github.com/AndroidIDEOfficial/tree-sitter-java), based on the format
 specified [here](https://developer.android.com/guide/components/aidl).
-
-## Limitations
-
-[//]: # (- Does not support escape sequences in property names.)
-
-[//]: # (- Escape sequences at the end of the line are not recognized.)
-
-[//]: # (- Only `=` and `:` are supported as property key-value separators.)
 
 ## License
 
