@@ -71,7 +71,6 @@ module.exports = grammar({
         $._name,
         $._simple_type,
         $._reserved_identifier,
-        $._variable_initializer
     ],
 
     conflicts: $ => [
@@ -278,24 +277,7 @@ module.exports = grammar({
             $.field_access,
             $.array_access,
             $.method_reference,
-            $.array_creation_expression,
         ),
-
-        array_creation_expression: $ => prec.right(seq(
-            'new',
-            repeat($._annotation),
-            field('type', $._simple_type),
-            choice(
-                seq(
-                    field('dimensions', repeat1($.dimensions_expr)),
-                    field('dimensions', optional($.dimensions))
-                ),
-                seq(
-                    field('dimensions', $.dimensions),
-                    field('value', $.array_initializer)
-                )
-            )
-        )),
 
         dimensions_expr: $ => seq(repeat($._annotation), '[', $.expression, ']'),
 
@@ -561,25 +543,8 @@ module.exports = grammar({
         ),
 
         variable_declarator: $ => seq(
-            $._variable_declarator_id,
-            optional(seq('=', field('value', $._variable_initializer)))
-        ),
-
-        _variable_declarator_id: $ => seq(
             field('name', choice($.identifier, $._reserved_identifier)),
             field('dimensions', optional($.dimensions))
-        ),
-
-        _variable_initializer: $ => choice(
-            $.expression,
-            $.array_initializer
-        ),
-
-        array_initializer: $ => seq(
-            '{',
-            commaSep($._variable_initializer),
-            optional(','),
-            '}'
         ),
 
         // Types
@@ -676,7 +641,7 @@ module.exports = grammar({
         formal_parameter: $ => seq(
             optional($.modifiers),
             field('type', $._unannotated_type),
-            $._variable_declarator_id
+            $.variable_declarator
         ),
 
         receiver_parameter: $ => seq(

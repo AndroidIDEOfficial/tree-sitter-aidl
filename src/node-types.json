@@ -182,10 +182,6 @@
         "named": true
       },
       {
-        "type": "array_creation_expression",
-        "named": true
-      },
-      {
         "type": "class_literal",
         "named": true
       },
@@ -357,79 +353,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "array_creation_expression",
-    "named": true,
-    "fields": {
-      "dimensions": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "dimensions",
-            "named": true
-          },
-          {
-            "type": "dimensions_expr",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_simple_type",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_initializer",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "marker_annotation",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "array_initializer",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "array_initializer",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -696,29 +619,6 @@
     }
   },
   {
-    "type": "dimensions_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "marker_annotation",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "element_value_array_initializer",
     "named": true,
     "fields": {},
@@ -851,26 +751,6 @@
     "type": "formal_parameter",
     "named": true,
     "fields": {
-      "dimensions": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "dimensions",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "type": {
         "multiple": false,
         "required": true,
@@ -883,11 +763,15 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "modifiers",
+          "named": true
+        },
+        {
+          "type": "variable_declarator",
           "named": true
         }
       ]
@@ -1691,20 +1575,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_initializer",
-            "named": true
-          },
-          {
-            "type": "expression",
             "named": true
           }
         ]
