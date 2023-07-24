@@ -203,7 +203,6 @@ module.exports = grammar({
         expression: $ => choice(
             $.assignment_expression,
             $.binary_expression,
-            $.instanceof_expression,
             $.lambda_expression,
             $.primary_expression,
             $.cast_expression,
@@ -256,14 +255,6 @@ module.exports = grammar({
                     field('right', $.expression)
                 ))
             )),
-
-        instanceof_expression: $ => prec(PREC.REL, seq(
-            field('left', $.expression),
-            'instanceof',
-            optional('final'),
-            field('right', $._type),
-            field('name', optional(choice($.identifier, $._reserved_identifier)))
-        )),
 
         lambda_expression: $ => seq(
             field('parameters', choice(
