@@ -44,6 +44,7 @@ const PREC = {
     OBJ_ACCESS: 16,  // .
     PARENS: 16,      // (Expression)
     CLASS_LITERAL: 17,  // .
+    DIMENSIONS_EXPR: 18,
 };
 
 module.exports = grammar({
@@ -76,6 +77,7 @@ module.exports = grammar({
     conflicts: $ => [
         [$.modifiers, $.annotated_type, $.receiver_parameter],
         [$.modifiers, $.annotated_type, $.package_declaration],
+        [$.package_declaration, $.modifiers],
         [$._unannotated_type, $.primary_expression, $.inferred_parameters],
         [$._unannotated_type, $.primary_expression],
         [$._unannotated_type, $.primary_expression, $.scoped_type_identifier],
@@ -276,10 +278,9 @@ module.exports = grammar({
             $.parenthesized_expression,
             $.field_access,
             $.array_access,
-            $.method_reference,
         ),
 
-        dimensions_expr: $ => seq(repeat($._annotation), '[', $.expression, ']'),
+        dimensions_expr: $ => prec.right(PREC.DIMENSIONS_EXPR, seq(repeat($._annotation), '[', $.expression, ']')),
 
         parenthesized_expression: $ => seq('(', $.expression, ')'),
 
@@ -305,13 +306,6 @@ module.exports = grammar({
         ),
 
         argument_list: $ => seq('(', commaSep($.expression), ')'),
-
-        method_reference: $ => seq(
-            choice($._type, $.primary_expression, $.super),
-            '::',
-            optional($.type_arguments),
-            choice('new', $.identifier)
-        ),
 
         type_arguments: $ => seq(
             '<',

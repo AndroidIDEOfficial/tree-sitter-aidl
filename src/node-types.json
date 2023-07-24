@@ -194,10 +194,6 @@
         "named": true
       },
       {
-        "type": "method_reference",
-        "named": true
-      },
-      {
         "type": "parenthesized_expression",
         "named": true
       },
@@ -1104,33 +1100,6 @@
     }
   },
   {
-    "type": "method_reference",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "_type",
-          "named": true
-        },
-        {
-          "type": "primary_expression",
-          "named": true
-        },
-        {
-          "type": "super",
-          "named": true
-        },
-        {
-          "type": "type_arguments",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "modifiers",
     "named": true,
     "fields": {},
@@ -1688,10 +1657,6 @@
     "named": false
   },
   {
-    "type": "::",
-    "named": false
-  },
-  {
     "type": ";",
     "named": false
   },
@@ -1853,10 +1818,6 @@
   },
   {
     "type": "long",
-    "named": false
-  },
-  {
-    "type": "new",
     "named": false
   },
   {

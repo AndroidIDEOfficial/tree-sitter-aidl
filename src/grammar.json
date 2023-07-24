@@ -2043,36 +2043,36 @@
         {
           "type": "SYMBOL",
           "name": "array_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "method_reference"
         }
       ]
     },
     "dimensions_expr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC_RIGHT",
+      "value": 18,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_annotation"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "["
+          },
+          {
             "type": "SYMBOL",
-            "name": "_annotation"
+            "name": "expression"
+          },
+          {
+            "type": "STRING",
+            "value": "]"
           }
-        },
-        {
-          "type": "STRING",
-          "value": "["
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        }
-      ]
+        ]
+      }
     },
     "parenthesized_expression": {
       "type": "SEQ",
@@ -2269,57 +2269,6 @@
         {
           "type": "STRING",
           "value": ")"
-        }
-      ]
-    },
-    "method_reference": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_type"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "primary_expression"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "super"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "::"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "type_arguments"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "new"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          ]
         }
       ]
     },
@@ -4132,6 +4081,10 @@
       "modifiers",
       "annotated_type",
       "package_declaration"
+    ],
+    [
+      "package_declaration",
+      "modifiers"
     ],
     [
       "_unannotated_type",
