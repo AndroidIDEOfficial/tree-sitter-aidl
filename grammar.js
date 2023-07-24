@@ -205,10 +205,7 @@ module.exports = grammar({
             $.binary_expression,
             $.instanceof_expression,
             $.lambda_expression,
-            $.ternary_expression,
-            $.update_expression,
             $.primary_expression,
-            $.unary_expression,
             $.cast_expression,
             $.switch_expression,
         ),
@@ -227,7 +224,7 @@ module.exports = grammar({
                 $.field_access,
                 $.array_access
             )),
-            field('operator', choice('=', '+=', '-=', '*=', '/=', '&=', '|=', '^=', '%=', '<<=', '>>=', '>>>=')),
+            '=',
             field('right', $.expression)
         )),
 
@@ -282,34 +279,6 @@ module.exports = grammar({
             ')'
         ),
 
-        ternary_expression: $ => prec.right(PREC.TERNARY, seq(
-            field('condition', $.expression),
-            '?',
-            field('consequence', $.expression),
-            ':',
-            field('alternative', $.expression)
-        )),
-
-        unary_expression: $ => choice(...[
-            ['+', PREC.UNARY],
-            ['-', PREC.UNARY],
-            ['!', PREC.UNARY],
-            ['~', PREC.UNARY],
-        ].map(([operator, precedence]) =>
-            prec.left(precedence, seq(
-                field('operator', operator),
-                field('operand', $.expression)
-            ))
-        )),
-
-        update_expression: $ => prec.left(PREC.UNARY, choice(
-            // Post (in|de)crement is evaluated before pre (in|de)crement
-            seq($.expression, '++'),
-            seq($.expression, '--'),
-            seq('++', $.expression),
-            seq('--', $.expression)
-        )),
-
         primary_expression: $ => choice(
             $._literal,
             $.class_literal,
@@ -319,7 +288,6 @@ module.exports = grammar({
             $.parenthesized_expression,
             $.field_access,
             $.array_access,
-            $.method_invocation,
             $.method_reference,
             $.array_creation_expression,
         ),
@@ -363,23 +331,6 @@ module.exports = grammar({
             '[',
             field('index', $.expression),
             ']',
-        ),
-
-        method_invocation: $ => seq(
-            choice(
-                field('name', choice($.identifier, $._reserved_identifier)),
-                seq(
-                    field('object', choice($.primary_expression, $.super)),
-                    '.',
-                    optional(seq(
-                        $.super,
-                        '.'
-                    )),
-                    field('type_arguments', optional($.type_arguments)),
-                    field('name', choice($.identifier, $._reserved_identifier)),
-                )
-            ),
-            field('arguments', $.argument_list)
         ),
 
         argument_list: $ => seq('(', commaSep($.expression), ')'),
