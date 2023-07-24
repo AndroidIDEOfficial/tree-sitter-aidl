@@ -358,17 +358,9 @@ module.exports = grammar({
         statement: $ => choice(
             $.declaration,
             $.expression_statement,
-            $.labeled_statement,
-            $.if_statement,
-            $.while_statement,
-            $.for_statement,
-            $.enhanced_for_statement,
             $.block,
             ';',
             $.assert_statement,
-            $.do_statement,
-            $.break_statement,
-            $.continue_statement,
             $.return_statement,
             $.yield_statement,
             $.synchronized_statement,
@@ -387,26 +379,10 @@ module.exports = grammar({
             ';'
         ),
 
-        labeled_statement: $ => seq(
-            $.identifier, ':', $.statement
-        ),
-
         assert_statement: $ => choice(
             seq('assert', $.expression, ';'),
             seq('assert', $.expression, ':', $.expression, ';')
         ),
-
-        do_statement: $ => seq(
-            'do',
-            field('body', $.statement),
-            'while',
-            field('condition', $.parenthesized_expression),
-            ';'
-        ),
-
-        break_statement: $ => seq('break', optional($.identifier), ';'),
-
-        continue_statement: $ => seq('continue', optional($.identifier), ';'),
 
         return_statement: $ => seq(
             'return',
@@ -477,45 +453,6 @@ module.exports = grammar({
             ),
             $.identifier,
             $.field_access
-        ),
-
-        if_statement: $ => prec.right(seq(
-            'if',
-            field('condition', $.condition),
-            field('consequence', $.statement),
-            optional(seq('else', field('alternative', $.statement)))
-        )),
-
-        while_statement: $ => seq(
-            'while',
-            field('condition', $.condition),
-            field('body', $.statement)
-        ),
-
-        for_statement: $ => seq(
-            'for', '(',
-            choice(
-                field('init', $.local_variable_declaration),
-                seq(
-                    commaSep(field('init', $.expression)),
-                    ';'
-                )
-            ),
-            field('condition', optional($.expression)), ';',
-            commaSep(field('update', $.expression)), ')',
-            field('body', $.statement)
-        ),
-
-        enhanced_for_statement: $ => seq(
-            'for',
-            '(',
-            optional($.modifiers),
-            field('type', $._unannotated_type),
-            $._variable_declarator_id,
-            ':',
-            field('value', $.expression),
-            ')',
-            field('body', $.statement)
         ),
 
         // Annotations
